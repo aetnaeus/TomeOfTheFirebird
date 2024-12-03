@@ -31,8 +31,9 @@ namespace TomeOfTheFirebird.NewComponents
 			{
 				return;
 			}
-			bool flag2 = base.Owner.State.Features.EffortlessDualWielding && unitPartWeaponTraining != null && unitPartWeaponTraining.IsSuitableWeapon(maybeWeapon2);
-			if (!maybeWeapon2.Blueprint.IsLight && !maybeWeapon.Blueprint.Double && !maybeWeapon2.IsShield && !flag2)//This SHOULD cancel the -2 for using a heavy weapon in offhand?
+			bool fighterWeaponTraining = base.Owner.State.Features.EffortlessDualWielding && unitPartWeaponTraining != null && unitPartWeaponTraining.IsSuitableWeapon(maybeWeapon2);
+   			bool giantWeaponWielder = base.Owner.State.Features.FighterOnHandedGrip && maybeWeapon.Blueprint.IsTwoHanded && maybeWeapon2.Blueprint.IsTwoHanded && !maybeWeapon.Blueprint.Double && !maybeWeapon2.Blueprint.Double;
+			if (!maybeWeapon2.Blueprint.IsLight && !maybeWeapon.Blueprint.Double && !maybeWeapon2.IsShield && !fighterWeaponTraining && giantWeaponWielder)//This SHOULD cancel the -2 for using a heavy weapon in offhand?
 			{
 				num += 2;
 				evt.AddModifier(num, base.Fact, ModifierDescriptor.UntypedStackable);
